@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('node:path');
 const chalk = require('chalk');
-const platformCodes = require(path.join(__dirname, '../../../../tools/cli/lib/platform-codes'));
 
 /**
  * Validate that a resolved path is within the project root (prevents path traversal)
@@ -97,15 +96,6 @@ async function install(options) {
       logger.log(chalk.cyan(`Game engine support configured for: ${platformNames.join(', ')}`));
     }
 
-    // Handle IDE-specific configurations if needed
-    if (installedIDEs && installedIDEs.length > 0) {
-      logger.log(chalk.cyan(`Configuring BMGD for IDEs: ${installedIDEs.join(', ')}`));
-
-      for (const ide of installedIDEs) {
-        await configureForIDE(ide, projectRoot, config, logger);
-      }
-    }
-
     logger.log(chalk.green('✓ BMGD Module installation complete'));
     logger.log(chalk.dim('  Game development workflows ready'));
     logger.log(chalk.dim('  Agents: Game Designer, Game Dev, Game Architect, Game SM, Game QA, Game Solo Dev'));
@@ -114,46 +104,6 @@ async function install(options) {
   } catch (error) {
     logger.error(chalk.red(`Error installing BMGD module: ${error.message}`));
     return false;
-  }
-}
-
-/**
- * Configure BMGD module for specific platform/IDE
- * @private
- */
-async function configureForIDE(ide, projectRoot, config, logger) {
-  // Validate platform code
-  if (!platformCodes.isValidPlatform(ide)) {
-    logger.warn(chalk.yellow(`  Warning: Unknown platform code '${ide}'. Skipping BMGD configuration.`));
-    return;
-  }
-
-  const platformName = platformCodes.getDisplayName(ide);
-
-  // Try to load platform-specific handler
-  const platformSpecificPath = path.join(__dirname, 'platform-specifics', `${ide}.js`);
-
-  try {
-    if (await fs.pathExists(platformSpecificPath)) {
-      const platformHandler = require(platformSpecificPath);
-
-      if (typeof platformHandler.install === 'function') {
-        const success = await platformHandler.install({
-          projectRoot,
-          config,
-          logger,
-          platformInfo: platformCodes.getPlatform(ide),
-        });
-        if (!success) {
-          logger.warn(chalk.yellow(`  Warning: BMGD platform handler for ${platformName} returned failure`));
-        }
-      }
-    } else {
-      // No platform-specific handler for this IDE
-      logger.log(chalk.dim(`  No BMGD-specific configuration for ${platformName}`));
-    }
-  } catch (error) {
-    logger.warn(chalk.yellow(`  Warning: Could not load BMGD platform-specific handler for ${platformName}: ${error.message}`));
   }
 }
 
