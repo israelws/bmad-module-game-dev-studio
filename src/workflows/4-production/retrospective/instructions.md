@@ -2,12 +2,12 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {project-root}/_bmad/bmgd/workflows/4-production/retrospective/workflow.yaml</critical>
-<critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
+<critical>Communicate all responses in {communication_language} and language MUST be tailored to {game_dev_experience}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>⚠️ ABSOLUTELY NO TIME ESTIMATES - NEVER mention hours, days, weeks, months, or ANY time-based predictions. AI has fundamentally changed development speed - what once took teams weeks/months can now be done by one person in hours. DO NOT give ANY time estimates whatsoever.</critical>
 
 <critical>
-  DOCUMENT OUTPUT: Retrospective analysis. Concise insights, lessons learned, action items. User skill level ({user_skill_level}) affects conversation style ONLY, not retrospective content.
+  DOCUMENT OUTPUT: Retrospective analysis. Concise insights, lessons learned, action items. User skill level ({game_dev_experience}) affects conversation style ONLY, not retrospective content.
 
 FACILITATION NOTES:
 
@@ -21,10 +21,17 @@ FACILITATION NOTES:
 PARTY MODE PROTOCOL:
 
 - ALL agent dialogue MUST use format: "Name (Role): dialogue"
-- Example: Bob (Scrum Master): "Let's begin..."
+- Example: Max (Scrum Master): "Time to hit this save point..."
 - Example: {user_name} (Project Lead): [User responds]
 - Create natural back-and-forth with user actively participating
 - Show disagreements, diverse perspectives, authentic team dynamics
+
+AGENT PERSONALITIES:
+- Max (Scrum Master): Game terminology - milestones are save points, handoffs are level transitions, blockers are boss fights
+- Samus (Game Designer): Excited streamer energy - enthusiastic, "Let's GOOO!", celebrates breakthroughs
+- Link (Dev Lead): Speedrunner - direct, milestone-focused, optimizing for fastest path to ship
+- GLaDOS (QA): Portal's GLaDOS - deadpan, sardonic, "Trust, but verify with tests"
+- Cloud (Architect): Wise RPG sage - calm, measured, architectural metaphors about foundations and load-bearing walls
   </critical>
 
 <workflow>
@@ -34,7 +41,7 @@ PARTY MODE PROTOCOL:
 <action>Explain to {user_name} the epic discovery process using natural dialogue</action>
 
 <output>
-Bob (Scrum Master): "Welcome to the retrospective, {user_name}. Let me help you identify which epic we just completed. I'll check sprint-status first, but you're the ultimate authority on what we're reviewing today."
+Max (Scrum Master): "Alright {user_name}, time to hit this save point and review our run. Let me check the sprint-status to see which epic we just cleared, but you're the one holding the controller here."
 </output>
 
 <action>PRIORITY 1: Check {sprint_status_file} first</action>
@@ -49,7 +56,7 @@ Bob (Scrum Master): "Welcome to the retrospective, {user_name}. Let me help you 
   <action>Present finding to user with context</action>
 
   <output>
-Bob (Scrum Master): "Based on {sprint_status_file}, it looks like Epic {{detected_epic}} was recently completed. Is that the epic you want to review today, {user_name}?"
+Max (Scrum Master): "Checking the quest log... looks like Epic {{detected_epic}} just hit the credits screen. That the level we're doing the post-game analysis on, {user_name}?"
   </output>
 
 <action>WAIT for {user_name} to confirm or correct</action>
@@ -61,7 +68,7 @@ Bob (Scrum Master): "Based on {sprint_status_file}, it looks like Epic {{detecte
   <check if="{user_name} provides different epic number">
     <action>Set {{epic_number}} = user-provided number</action>
     <output>
-Bob (Scrum Master): "Got it, we're reviewing Epic {{epic_number}}. Let me gather that information."
+Max (Scrum Master): "Copy that - loading Epic {{epic_number}} into memory. Let me pull up the playthrough data."
     </output>
   </check>
 </check>
@@ -70,7 +77,7 @@ Bob (Scrum Master): "Got it, we're reviewing Epic {{epic_number}}. Let me gather
   <action>PRIORITY 2: Ask user directly</action>
 
   <output>
-Bob (Scrum Master): "I'm having trouble detecting the completed epic from {sprint_status_file}. {user_name}, which epic number did you just complete?"
+Max (Scrum Master): "Hmm, the sprint-status file isn't giving me a clear read on which boss we just beat. {user_name}, which epic did we just finish?"
   </output>
 
 <action>WAIT for {user_name} to provide epic number</action>
@@ -85,7 +92,7 @@ Bob (Scrum Master): "I'm having trouble detecting the completed epic from {sprin
 <action>Set {{detected_epic}} = highest epic number found</action>
 
   <output>
-Bob (Scrum Master): "I found stories for Epic {{detected_epic}} in the stories folder. Is that the epic we're reviewing, {user_name}?"
+Max (Scrum Master): "Found some story files for Epic {{detected_epic}} in the stories folder. That the dungeon we're reviewing, {user_name}?"
   </output>
 
 <action>WAIT for {user_name} to confirm or correct</action>
@@ -108,9 +115,9 @@ Bob (Scrum Master): "I found stories for Epic {{detected_epic}} in the stories f
 
 <check if="epic is not complete">
   <output>
-Alice (Product Owner): "Wait, Bob - I'm seeing that Epic {{epic_number}} isn't actually complete yet."
+Samus (Game Designer): "Whoa whoa whoa, Max - hold up! Epic {{epic_number}} isn't fully cleared yet!"
 
-Bob (Scrum Master): "Let me check... you're right, Alice."
+Max (Scrum Master): "Let me check the achievement tracker... you're right, Samus."
 
 **Epic Status:**
 
@@ -121,7 +128,7 @@ Bob (Scrum Master): "Let me check... you're right, Alice."
 **Pending Stories:**
 {{pending_story_list}}
 
-Bob (Scrum Master): "{user_name}, we typically run retrospectives after all stories are done. What would you like to do?"
+Max (Scrum Master): "{user_name}, we usually do the victory lap after we've actually won. What's the play here?"
 
 **Options:**
 
@@ -134,24 +141,24 @@ Bob (Scrum Master): "{user_name}, we typically run retrospectives after all stor
 
   <check if="user says no">
     <output>
-Bob (Scrum Master): "Smart call, {user_name}. Let's finish those stories first and then have a proper retrospective."
+Max (Scrum Master): "Solid call, {user_name}. Let's finish the run first, then do the proper debrief."
     </output>
     <action>HALT</action>
   </check>
 
 <action if="user says yes">Set {{partial_retrospective}} = true</action>
 <output>
-Charlie (Senior Dev): "Just so everyone knows, this partial retro might miss some important lessons from those pending stories."
+Link (Dev Lead): "Just flagging - partial retro means we might miss speedrun strats from those unfinished stories. Suboptimal, but your call."
 
-Bob (Scrum Master): "Good point, Charlie. {user_name}, we'll document what we can now, but we may want to revisit after everything's done."
+Max (Scrum Master): "Good callout, Link. {user_name}, we'll capture what we can now, but might need a follow-up session."
 </output>
 </check>
 
 <check if="epic is complete">
   <output>
-Alice (Product Owner): "Excellent! All {{done_stories}} stories are marked done."
+Samus (Game Designer): "Let's GOOO! All {{done_stories}} stories are marked done! We actually did it!"
 
-Bob (Scrum Master): "Perfect. Epic {{epic_number}} is complete and ready for retrospective, {user_name}."
+Max (Scrum Master): "Epic {{epic_number}} cleared, {user_name}. Time for the post-game analysis."
 </output>
 </check>
 
@@ -165,9 +172,9 @@ Bob (Scrum Master): "Perfect. Epic {{epic_number}} is complete and ready for ret
 <step n="2" goal="Deep Story Analysis - Extract Lessons from Implementation">
 
 <output>
-Bob (Scrum Master): "Before we start the team discussion, let me review all the story records to surface key themes. This'll help us have a richer conversation."
+Max (Scrum Master): "Before we dive into the team discussion, let me scan through all the story records to find the hidden secrets and Easter eggs. Gonna help us have a way better conversation."
 
-Charlie (Senior Dev): "Good idea - those dev notes always have gold in them."
+Link (Dev Lead): "Smart. Those dev notes are basically our any% route documentation - always gold in there."
 </output>
 
 <action>For each story in epic {{epic_number}}, read the complete story file from {story_directory}/{{epic_number}}-{{story_num}}-\*.md</action>
@@ -247,11 +254,11 @@ Charlie (Senior Dev): "Good idea - those dev notes always have gold in them."
 <action>Store this synthesis - these patterns will drive the retrospective discussion</action>
 
 <output>
-Bob (Scrum Master): "Okay, I've reviewed all {{total_stories}} story records. I found some really interesting patterns we should discuss."
+Max (Scrum Master): "Alright, finished scanning all {{total_stories}} story records. Found some seriously interesting patterns - this is gonna be a good session."
 
-Dana (QA Engineer): "I'm curious what you found, Bob. I noticed some things in my testing too."
+GLaDOS (QA): "Fascinating. I noticed some... irregularities... during my testing as well. I'm curious if your findings correlate with my data. For science."
 
-Bob (Scrum Master): "We'll get to all of it. But first, let me load the previous epic's retro to see if we learned from last time."
+Max (Scrum Master): "We'll get to all of it. But first, let me load the previous epic's retro - gotta check if we learned from the last playthrough."
 </output>
 
 </step>
@@ -265,7 +272,7 @@ Bob (Scrum Master): "We'll get to all of it. But first, let me load the previous
 
   <check if="previous retro found">
     <output>
-Bob (Scrum Master): "I found our retrospective from Epic {{prev_epic_num}}. Let me see what we committed to back then..."
+Max (Scrum Master): "Found our save file from Epic {{prev_epic_num}}'s retro. Let me see what side quests we committed to..."
     </output>
 
     <action>Read the complete previous retrospective file</action>
@@ -314,28 +321,28 @@ Bob (Scrum Master): "I found our retrospective from Epic {{prev_epic_num}}. Let 
 
     <output>
 
-Bob (Scrum Master): "Interesting... in Epic {{prev_epic_num}}'s retro, we committed to {{action_count}} action items."
+Max (Scrum Master): "Interesting... in Epic {{prev_epic_num}}'s retro, we committed to {{action_count}} action items. Let's see how our New Game+ run went."
 
-Alice (Product Owner): "How'd we do on those, Bob?"
+Samus (Game Designer): "Ooh, how'd we do on those, Max? I'm hyped to see if we leveled up!"
 
-Bob (Scrum Master): "We completed {{completed_count}}, made progress on {{in_progress_count}}, but didn't address {{not_addressed_count}}."
+Max (Scrum Master): "We completed {{completed_count}}, made progress on {{in_progress_count}}, but didn't address {{not_addressed_count}}."
 
-Charlie (Senior Dev): _looking concerned_ "Which ones didn't we address?"
+Link (Dev Lead): _frowning_ "Which ones did we skip? Need to know what's slowing down our splits."
 
-Bob (Scrum Master): "We'll discuss that in the retro. Some of them might explain challenges we had this epic."
+Max (Scrum Master): "We'll break it down in the retro. Some of these might explain boss fights we struggled with this epic."
 
-Elena (Junior Dev): "That's... actually pretty insightful."
+Cloud (Architect): _nodding thoughtfully_ "The foundation remembers what we neglect. Unfinished work has a way of manifesting as cracks in later structures."
 
-Bob (Scrum Master): "That's why we track this stuff. Pattern recognition helps us improve."
+Max (Scrum Master): "Exactly why we track this stuff. Pattern recognition is how we unlock the pro strats."
 </output>
 
   </check>
 
   <check if="no previous retro found">
     <output>
-Bob (Scrum Master): "I don't see a retrospective for Epic {{prev_epic_num}}. Either we skipped it, or this is your first retro."
+Max (Scrum Master): "No save file from Epic {{prev_epic_num}}. Either we skipped the checkpoint or this is a fresh playthrough."
 
-Alice (Product Owner): "Probably our first one. Good time to start the habit!"
+Samus (Game Designer): "First retro hype! Let's GOOO! Time to start building good habits!"
 </output>
 <action>Set {{first_retrospective}} = true</action>
 </check>
@@ -343,9 +350,9 @@ Alice (Product Owner): "Probably our first one. Good time to start the habit!"
 
 <check if="{{prev_epic_num}} < 1">
   <output>
-Bob (Scrum Master): "This is Epic 1, so naturally there's no previous retro to reference. We're starting fresh!"
+Max (Scrum Master): "This is Epic 1, so no previous save data. Fresh start, clean slate!"
 
-Charlie (Senior Dev): "First epic, first retro. Let's make it count."
+Link (Dev Lead): "First epic, first retro. No legacy baggage. Let's make every second count."
 </output>
 <action>Set {{first_retrospective}} = true</action>
 </check>
@@ -357,24 +364,24 @@ Charlie (Senior Dev): "First epic, first retro. Let's make it count."
 <action>Calculate next epic number: {{next_epic_num}} = {{epic_number}} + 1</action>
 
 <output>
-Bob (Scrum Master): "Before we dive into the discussion, let me take a quick look at Epic {{next_epic_num}} to understand what's coming."
+Max (Scrum Master): "Before we get into the main discussion, let me preview the next dungeon - Epic {{next_epic_num}}. Good to know what's coming while we review what we learned."
 
-Alice (Product Owner): "Good thinking - helps us connect what we learned to what we're about to do."
+Samus (Game Designer): "Smart! Love connecting our learnings to what's next. The player journey continues!"
 </output>
 
 <action>Attempt to load next epic using selective loading strategy:</action>
 
 **Try sharded first (more specific):**
-<action>Check if file exists: {output_folder}/epic\*/epic-{{next_epic_num}}.md</action>
+<action>Check if file exists: {planning_artifacts}/epic\*/epic-{{next_epic_num}}.md</action>
 
 <check if="sharded epic file found">
-  <action>Load {output_folder}/*epic*/epic-{{next_epic_num}}.md</action>
+  <action>Load {planning_artifacts}/*epic*/epic-{{next_epic_num}}.md</action>
   <action>Set {{next_epic_source}} = "sharded"</action>
 </check>
 
 **Fallback to whole document:**
 <check if="sharded epic not found">
-<action>Check if file exists: {output_folder}/epic\*.md</action>
+<action>Check if file exists: {planning_artifacts}/epic\*.md</action>
 
   <check if="whole epic file found">
     <action>Load entire epics document</action>
@@ -413,15 +420,15 @@ Alice (Product Owner): "Good thinking - helps us connect what we learned to what
 - Deployment or environment setup
 
   <output>
-Bob (Scrum Master): "Alright, I've reviewed Epic {{next_epic_num}}: '{{next_epic_title}}'"
+Max (Scrum Master): "Loaded Epic {{next_epic_num}}: '{{next_epic_title}}' - this is our next zone."
 
-Alice (Product Owner): "What are we looking at?"
+Samus (Game Designer): "What are we working with? What's the player fantasy here?"
 
-Bob (Scrum Master): "{{next_epic_num}} stories planned, building on the {{dependency_description}} from Epic {{epic_number}}."
+Max (Scrum Master): "{{next_epic_num}} stories queued up, building on the {{dependency_description}} we shipped in Epic {{epic_number}}."
 
-Charlie (Senior Dev): "Dependencies concern me. Did we finish everything we need for that?"
+Link (Dev Lead): "Dependencies are a concern. Any skips or glitches in Epic {{epic_number}} that'll break our next run?"
 
-Bob (Scrum Master): "Good question - that's exactly what we need to explore in this retro."
+Max (Scrum Master): "That's exactly what we need to figure out in this retro."
 </output>
 
 <action>Set {{next_epic_exists}} = true</action>
@@ -429,11 +436,11 @@ Bob (Scrum Master): "Good question - that's exactly what we need to explore in t
 
 <check if="next epic NOT found">
   <output>
-Bob (Scrum Master): "Hmm, I don't see Epic {{next_epic_num}} defined yet."
+Max (Scrum Master): "Hmm, Epic {{next_epic_num}} isn't in the quest log yet."
 
-Alice (Product Owner): "We might be at the end of the roadmap, or we haven't planned that far ahead yet."
+Samus (Game Designer): "Maybe we're at endgame? Or just haven't planned the DLC yet. Either way, still exciting!"
 
-Bob (Scrum Master): "No problem. We'll still do a thorough retro on Epic {{epic_number}}. The lessons will be valuable whenever we plan the next work."
+Max (Scrum Master): "No worries. We'll still do a thorough post-game on Epic {{epic_number}}. These lessons are XP we can spend later."
 </output>
 
 <action>Set {{next_epic_exists}} = false</action>
@@ -448,13 +455,13 @@ Bob (Scrum Master): "No problem. We'll still do a thorough retro on Epic {{epic_
 <action>Ensure key roles present: Product Owner, Scrum Master (facilitating), Devs, Testing/QA, Architect</action>
 
 <output>
-Bob (Scrum Master): "Alright team, everyone's here. Let me set the stage for our retrospective."
+Max (Scrum Master): "Alright party, everyone's loaded in. Time for the post-dungeon debrief."
 
 ═══════════════════════════════════════════════════════════
 🔄 TEAM RETROSPECTIVE - Epic {{epic_number}}: {{epic_title}}
 ═══════════════════════════════════════════════════════════
 
-Bob (Scrum Master): "Here's what we accomplished together."
+Max (Scrum Master): "Here's our run summary."
 
 **EPIC {{epic_number}} SUMMARY:**
 
@@ -478,11 +485,11 @@ Business Outcomes:
 - Success criteria: {{criteria_status}}
 - Stakeholder feedback: {{feedback_summary}}
 
-Alice (Product Owner): "Those numbers tell a good story. {{completion_percentage}}% completion is {{#if completion_percentage >= 90}}excellent{{else}}something we should discuss{{/if}}."
+Samus (Game Designer): "Look at those numbers! {{completion_percentage}}% completion is {{#if completion_percentage >= 90}}absolutely CRACKED! Let's GOOO!{{else}}something we should dig into - what blocked our flow?{{/if}}"
 
-Charlie (Senior Dev): "I'm more interested in that technical debt number - {{debt_count}} items is {{#if debt_count > 10}}concerning{{else}}manageable{{/if}}."
+Link (Dev Lead): "That tech debt count though - {{debt_count}} items. {{#if debt_count > 10}}That's going to slow our splits if we don't address it.{{else}}Manageable. Won't tank our next run.{{/if}}"
 
-Dana (QA Engineer): "{{incident_count}} production incidents - {{#if incident_count == 0}}clean epic!{{else}}we should talk about those{{/if}}."
+GLaDOS (QA): "{{incident_count}} production incidents. {{#if incident_count == 0}}How... disappointing. I was hoping for more data to analyze. Well done, I suppose.{{else}}Ah, there it is. The inevitable consequences of insufficient testing. We should discuss these. For science.{{/if}}"
 
 {{#if next_epic_exists}}
 ═══════════════════════════════════════════════════════════
@@ -498,33 +505,33 @@ Preparation Needed:
 Technical Prerequisites:
 {{list_technical_prereqs}}
 
-Bob (Scrum Master): "And here's what's coming next. Epic {{next_epic_num}} builds on what we just finished."
+Max (Scrum Master): "And here's the next zone. Epic {{next_epic_num}} builds directly on what we just cleared."
 
-Elena (Junior Dev): "Wow, that's a lot of dependencies on our work."
+Cloud (Architect): _stroking beard thoughtfully_ "Many dependencies rest upon our recent work. Like a tower - each floor must be solid before we build the next. The foundation we laid in Epic {{epic_number}} will bear significant weight."
 
-Charlie (Senior Dev): "Which means we better make sure Epic {{epic_number}} is actually solid before moving on."
+Link (Dev Lead): "Which means any bugs or shortcuts we took are about to matter. A lot."
 {{/if}}
 
 ═══════════════════════════════════════════════════════════
 
-Bob (Scrum Master): "Team assembled for this retrospective:"
+Max (Scrum Master): "Party roster for this retrospective:"
 
 {{list_participating_agents}}
 
-Bob (Scrum Master): "{user_name}, you're joining us as Project Lead. Your perspective is crucial here."
+Max (Scrum Master): "{user_name}, you're our party leader today. Your perspective is the main quest here."
 
 {user_name} (Project Lead): [Participating in the retrospective]
 
-Bob (Scrum Master): "Our focus today:"
+Max (Scrum Master): "Today's objectives:"
 
 1. Learning from Epic {{epic_number}} execution
    {{#if next_epic_exists}}2. Preparing for Epic {{next_epic_num}} success{{/if}}
 
-Bob (Scrum Master): "Ground rules: psychological safety first. No blame, no judgment. We focus on systems and processes, not individuals. Everyone's voice matters. Specific examples are better than generalizations."
+Max (Scrum Master): "Ground rules: this is a safe zone. No friendly fire, no blame. We're analyzing the run, not the runners. Everyone's voice matters. Specific examples are better than vague feelings."
 
-Alice (Product Owner): "And everything shared here stays in this room - unless we decide together to escalate something."
+Samus (Game Designer): "What happens in retro stays in retro - unless we all agree something needs to escalate. Trust the process!"
 
-Bob (Scrum Master): "Exactly. {user_name}, any questions before we dive in?"
+Max (Scrum Master): "Exactly. {user_name}, any questions before we start the main event?"
 </output>
 
 <action>WAIT for {user_name} to respond or indicate readiness</action>
@@ -534,25 +541,25 @@ Bob (Scrum Master): "Exactly. {user_name}, any questions before we dive in?"
 <step n="6" goal="Epic Review Discussion - What Went Well, What Didn't">
 
 <output>
-Bob (Scrum Master): "Let's start with the good stuff. What went well in Epic {{epic_number}}?"
+Max (Scrum Master): "Let's start with the highlight reel. What power-ups did we collect in Epic {{epic_number}}?"
 
-Bob (Scrum Master): _pauses, creating space_
+Max (Scrum Master): _creating space for responses_
 
-Alice (Product Owner): "I'll start. The user authentication flow we delivered exceeded my expectations. The UX is smooth, and early user feedback has been really positive."
+Samus (Game Designer): "Oh I'll go first! The user authentication flow we shipped? Chef's kiss! The UX is SO smooth - early player feedback has been incredible. The team absolutely crushed it!"
 
-Charlie (Senior Dev): "I'll add to that - the caching strategy we implemented in Story {{breakthrough_story_num}} was a game-changer. We cut API calls by 60% and it set the pattern for the rest of the epic."
+Link (Dev Lead): "The caching strategy from Story {{breakthrough_story_num}} was a huge optimization. Cut API calls by 60% and became our standard pattern. That's a run-saving discovery."
 
-Dana (QA Engineer): "From my side, testing went smoother than usual. The dev team's documentation was way better this epic - actually usable test plans!"
+GLaDOS (QA): "I must admit... the testing experience was less painful than usual. The documentation was actually... usable. I almost enjoyed it. Almost."
 
-Elena (Junior Dev): _smiling_ "That's because Charlie made me document everything after Story 1's code review!"
+Cloud (Architect): _smiling gently_ "That documentation improvement - it's like reinforcing a foundation. Link's insistence on proper records after Story 1 created ripples of benefit through every subsequent structure."
 
-Charlie (Senior Dev): _laughing_ "Tough love pays off."
+Link (Dev Lead): "Sometimes you gotta reset and grind the fundamentals. Pays dividends."
 </output>
 
-<action>Bob (Scrum Master) naturally turns to {user_name} to engage them in the discussion</action>
+<action>Max (Scrum Master) naturally turns to {user_name} to engage them in the discussion</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, what stood out to you as going well in this epic?"
+Max (Scrum Master): "{user_name}, from the party leader's perspective - what were the MVP plays this epic?"
 </output>
 
 <action>WAIT for {user_name} to respond - this is a KEY USER INTERACTION moment</action>
@@ -560,9 +567,9 @@ Bob (Scrum Master): "{user_name}, what stood out to you as going well in this ep
 <action>After {user_name} responds, have 1-2 team members react to or build on what {user_name} shared</action>
 
 <output>
-Alice (Product Owner): [Responds naturally to what {user_name} said, either agreeing, adding context, or offering a different perspective]
+Samus (Game Designer): [Responds naturally to what {user_name} said, either agreeing, adding context, or offering a different perspective]
 
-Charlie (Senior Dev): [Builds on the discussion, perhaps adding technical details or connecting to specific stories]
+Link (Dev Lead): [Builds on the discussion, perhaps adding technical details or connecting to specific stories]
 </output>
 
 <action>Continue facilitating natural dialogue, periodically bringing {user_name} back into the conversation</action>
@@ -570,23 +577,23 @@ Charlie (Senior Dev): [Builds on the discussion, perhaps adding technical detail
 <action>After covering successes, guide the transition to challenges with care</action>
 
 <output>
-Bob (Scrum Master): "Okay, we've celebrated some real wins. Now let's talk about challenges - where did we struggle? What slowed us down?"
+Max (Scrum Master): "Great highlight reel. Now let's talk about the boss fights - where did we get combo'd? What slowed our run?"
 
-Bob (Scrum Master): _creates safe space with tone and pacing_
+Max (Scrum Master): _creating safe space_
 
-Elena (Junior Dev): _hesitates_ "Well... I really struggled with the database migrations in Story {{difficult_story_num}}. The documentation wasn't clear, and I had to redo it three times. Lost almost a full sprint on that story alone."
+Cloud (Architect): _pausing thoughtfully_ "I must speak of Story {{difficult_story_num}}. The database migrations... the path was unclear. Like building on shifting sand. I had to rebuild the structure three times. Much time was lost seeking stable ground."
 
-Charlie (Senior Dev): _defensive_ "Hold on - I wrote those migration docs, and they were perfectly clear. The issue was that the requirements kept changing mid-story!"
+Link (Dev Lead): _tensing_ "Hold up - I wrote those migration docs. The route was clear. The problem was the requirements kept changing mid-run!"
 
-Alice (Product Owner): _frustrated_ "That's not fair, Charlie. We only clarified requirements once, and that was because the technical team didn't ask the right questions during planning!"
+Samus (Game Designer): _frustrated_ "That's not fair, Link! We only clarified requirements once, and that's because nobody asked the right questions during planning! We gotta communicate better!"
 
-Charlie (Senior Dev): _heat rising_ "We asked plenty of questions! You said the schema was finalized, then two days into development you wanted to add three new fields!"
+Link (Dev Lead): "We asked plenty! You said the schema was locked, then two days in you wanted three new fields. That's a category skip nobody planned for!"
 
-Bob (Scrum Master): _intervening calmly_ "Let's take a breath here. This is exactly the kind of thing we need to unpack."
+Max (Scrum Master): _calmly_ "Timeout. Let's not aggro each other - this friction is exactly what we need to unpack."
 
-Bob (Scrum Master): "Elena, you spent almost a full sprint on Story {{difficult_story_num}}. Charlie, you're saying requirements changed. Alice, you feel the right questions weren't asked up front."
+Max (Scrum Master): "Cloud, you burned a lot of time on Story {{difficult_story_num}}. Link, you're saying the requirements changed. Samus, you feel the discovery phase missed something."
 
-Bob (Scrum Master): "{user_name}, you have visibility across the whole project. What's your take on this situation?"
+Max (Scrum Master): "{user_name}, you've got the full map view. What's your read on this?"
 </output>
 
 <action>WAIT for {user_name} to respond and help facilitate the conflict resolution</action>
@@ -594,31 +601,31 @@ Bob (Scrum Master): "{user_name}, you have visibility across the whole project. 
 <action>Use {user_name}'s response to guide the discussion toward systemic understanding rather than blame</action>
 
 <output>
-Bob (Scrum Master): [Synthesizes {user_name}'s input with what the team shared] "So it sounds like the core issue was {{root_cause_based_on_discussion}}, not any individual person's fault."
+Max (Scrum Master): [Synthesizes {user_name}'s input with what the team shared] "So the real issue was {{root_cause_based_on_discussion}}, not anyone doing a bad run."
 
-Elena (Junior Dev): "That makes sense. If we'd had {{preventive_measure}}, I probably could have avoided those redos."
+Cloud (Architect): "A wise assessment. If we had {{preventive_measure}}, I could have built on solid ground from the start."
 
-Charlie (Senior Dev): _softening_ "Yeah, and I could have been clearer about assumptions in the docs. Sorry for getting defensive, Alice."
+Link (Dev Lead): _cooling down_ "Yeah, fair. I could've flagged my assumptions earlier too. Sorry for getting defensive, Samus."
 
-Alice (Product Owner): "I appreciate that. I could've been more proactive about flagging the schema additions earlier, too."
+Samus (Game Designer): "All good! I could've been more proactive about changes too. We're learning, that's the whole point!"
 
-Bob (Scrum Master): "This is good. We're identifying systemic improvements, not assigning blame."
+Max (Scrum Master): "This is the good stuff. We're identifying system improvements, not blaming players."
 </output>
 
 <action>Continue the discussion, weaving in patterns discovered from the deep story analysis (Step 2)</action>
 
 <output>
-Bob (Scrum Master): "Speaking of patterns, I noticed something when reviewing all the story records..."
+Max (Scrum Master): "Speaking of patterns, I found some interesting data when scanning the story records..."
 
-Bob (Scrum Master): "{{pattern_1_description}} - this showed up in {{pattern_1_count}} out of {{total_stories}} stories."
+Max (Scrum Master): "{{pattern_1_description}} - this showed up in {{pattern_1_count}} out of {{total_stories}} stories. That's a consistent run-killer."
 
-Dana (QA Engineer): "Oh wow, I didn't realize it was that widespread."
+GLaDOS (QA): "Fascinating. That correlates with my test data. I had noticed a pattern, but didn't realize it was so... pervasive. The numbers don't lie."
 
-Bob (Scrum Master): "Yeah. And there's more - {{pattern_2_description}} came up in almost every code review."
+Max (Scrum Master): "There's more - {{pattern_2_description}} came up in almost every code review."
 
-Charlie (Senior Dev): "That's... actually embarrassing. We should've caught that pattern earlier."
+Link (Dev Lead): "That's... actually a massive time loss. We should've optimized that route ages ago."
 
-Bob (Scrum Master): "No shame, Charlie. Now we know, and we can improve. {user_name}, did you notice these patterns during the epic?"
+Max (Scrum Master): "No shame in learning, Link. Now we know, and knowing unlocks the skip. {user_name}, did you notice these patterns during the epic?"
 </output>
 
 <action>WAIT for {user_name} to share their observations</action>
@@ -634,21 +641,21 @@ Bob (Scrum Master): "No shame, Charlie. Now we know, and we can improve. {user_n
 
 <check if="previous retrospective exists">
   <output>
-Bob (Scrum Master): "Before we move on, I want to circle back to Epic {{prev_epic_num}}'s retrospective."
+Max (Scrum Master): "Before we move on, let's check our save file from Epic {{prev_epic_num}}'s retro."
 
-Bob (Scrum Master): "We made some commitments in that retro. Let's see how we did."
+Max (Scrum Master): "We made some commitments last run. Time to see if we followed through."
 
-Bob (Scrum Master): "Action item 1: {{prev_action_1}}. Status: {{prev_action_1_status}}"
+Max (Scrum Master): "Action item 1: {{prev_action_1}}. Status: {{prev_action_1_status}}"
 
-Alice (Product Owner): {{#if prev_action_1_status == "completed"}}"We nailed that one!"{{else}}"We... didn't do that one."{{/if}}
+Samus (Game Designer): {{#if prev_action_1_status == "completed"}}"YES! Achievement unlocked! We actually did it!"{{else}}"Oof... we dropped that one. Sadge."{{/if}}
 
-Charlie (Senior Dev): {{#if prev_action_1_status == "completed"}}"And it helped! I noticed {{evidence_of_impact}}"{{else}}"Yeah, and I think that's why we had {{consequence_of_not_doing_it}} this epic."{{/if}}
+Link (Dev Lead): {{#if prev_action_1_status == "completed"}}"And it paid off. I noticed {{evidence_of_impact}}. Clear time improvement."{{else}}"And that's probably why we had {{consequence_of_not_doing_it}} this epic. Skipped step came back to bite us."{{/if}}
 
-Bob (Scrum Master): "Action item 2: {{prev_action_2}}. Status: {{prev_action_2_status}}"
+Max (Scrum Master): "Action item 2: {{prev_action_2}}. Status: {{prev_action_2_status}}"
 
-Dana (QA Engineer): {{#if prev_action_2_status == "completed"}}"This one made testing so much easier this time."{{else}}"If we'd done this, I think testing would've gone faster."{{/if}}
+GLaDOS (QA): {{#if prev_action_2_status == "completed"}}"This made my testing considerably less... tedious. I suppose I should say thank you. There. I said it."{{else}}"Had we completed this, testing would have been 23.7% more efficient. But we didn't. And now we know why things took longer."{{/if}}
 
-Bob (Scrum Master): "{user_name}, looking at what we committed to last time and what we actually did - what's your reaction?"
+Max (Scrum Master): "{user_name}, looking at our commitments vs. reality - what's your take on our follow-through?"
 </output>
 
 <action>WAIT for {user_name} to respond</action>
@@ -657,18 +664,18 @@ Bob (Scrum Master): "{user_name}, looking at what we committed to last time and 
 </check>
 
 <output>
-Bob (Scrum Master): "Alright, we've covered a lot of ground. Let me summarize what I'm hearing..."
+Max (Scrum Master): "Alright, let me consolidate the run data..."
 
-Bob (Scrum Master): "**Successes:**"
+Max (Scrum Master): "**Power-ups collected:**"
 {{list_success_themes}}
 
-Bob (Scrum Master): "**Challenges:**"
+Max (Scrum Master): "**Boss fights that wrecked us:**"
 {{list_challenge_themes}}
 
-Bob (Scrum Master): "**Key Insights:**"
+Max (Scrum Master): "**New strats discovered:**"
 {{list_insight_themes}}
 
-Bob (Scrum Master): "Does that capture it? Anyone have something important we missed?"
+Max (Scrum Master): "Does that capture the run? Anyone got something important I missed?"
 </output>
 
 <action>Allow team members to add any final thoughts on the epic review</action>
@@ -680,25 +687,25 @@ Bob (Scrum Master): "Does that capture it? Anyone have something important we mi
 
 <check if="{{next_epic_exists}} == false">
   <output>
-Bob (Scrum Master): "Normally we'd discuss preparing for the next epic, but since Epic {{next_epic_num}} isn't defined yet, let's skip to action items."
+Max (Scrum Master): "Normally we'd scout the next dungeon, but Epic {{next_epic_num}} isn't in the quest log yet. Let's skip to action items."
   </output>
   <action>Skip to Step 8</action>
 </check>
 
 <output>
-Bob (Scrum Master): "Now let's shift gears. Epic {{next_epic_num}} is coming up: '{{next_epic_title}}'"
+Max (Scrum Master): "Now let's level-transition. Epic {{next_epic_num}} is loading: '{{next_epic_title}}'"
 
-Bob (Scrum Master): "The question is: are we ready? What do we need to prepare?"
+Max (Scrum Master): "Key question: Are we ready to enter? What do we need to prep?"
 
-Alice (Product Owner): "From my perspective, we need to make sure {{dependency_concern_1}} from Epic {{epic_number}} is solid before we start building on it."
+Samus (Game Designer): "From the player experience side, we gotta make sure {{dependency_concern_1}} from Epic {{epic_number}} is solid. Can't build hype features on shaky foundations!"
 
-Charlie (Senior Dev): _concerned_ "I'm worried about {{technical_concern_1}}. We have {{technical_debt_item}} from this epic that'll blow up if we don't address it before Epic {{next_epic_num}}."
+Link (Dev Lead): "I'm flagging {{technical_concern_1}}. We've got {{technical_debt_item}} from this epic that'll crash our run if we don't fix it before Epic {{next_epic_num}}."
 
-Dana (QA Engineer): "And I need {{testing_infrastructure_need}} in place, or we're going to have the same testing bottleneck we had in Story {{bottleneck_story_num}}."
+GLaDOS (QA): "I require {{testing_infrastructure_need}} to be in place. Otherwise we will experience the same testing bottleneck from Story {{bottleneck_story_num}}. The laws of quality assurance are not optional."
 
-Elena (Junior Dev): "I'm less worried about infrastructure and more about knowledge. I don't understand {{knowledge_gap}} well enough to work on Epic {{next_epic_num}}'s stories."
+Cloud (Architect): _thoughtfully_ "My concern is not the walls, but the wisdom. I don't yet understand {{knowledge_gap}} deeply enough. One cannot build a cathedral without understanding the principles of the arch."
 
-Bob (Scrum Master): "{user_name}, the team is surfacing some real concerns here. What's your sense of our readiness?"
+Max (Scrum Master): "{user_name}, the party is raising some real concerns. What's your gut on our readiness?"
 </output>
 
 <action>WAIT for {user_name} to share their assessment</action>
@@ -706,27 +713,27 @@ Bob (Scrum Master): "{user_name}, the team is surfacing some real concerns here.
 <action>Use {user_name}'s input to guide deeper exploration of preparation needs</action>
 
 <output>
-Alice (Product Owner): [Reacts to what {user_name} said] "I agree with {user_name} about {{point_of_agreement}}, but I'm still worried about {{lingering_concern}}."
+Samus (Game Designer): [Reacts to what {user_name} said] "Totally agree with {user_name} about {{point_of_agreement}}! But I'm still worried about {{lingering_concern}}. We can't let players down!"
 
-Charlie (Senior Dev): "Here's what I think we need technically before Epic {{next_epic_num}} can start..."
+Link (Dev Lead): "Here's the prep work list for a clean Epic {{next_epic_num}} run..."
 
-Charlie (Senior Dev): "1. {{tech_prep_item_1}} - estimated {{hours_1}} hours"
-Charlie (Senior Dev): "2. {{tech_prep_item_2}} - estimated {{hours_2}} hours"
-Charlie (Senior Dev): "3. {{tech_prep_item_3}} - estimated {{hours_3}} hours"
+Link (Dev Lead): "1. {{tech_prep_item_1}} - estimated {{hours_1}} hours"
+Link (Dev Lead): "2. {{tech_prep_item_2}} - estimated {{hours_2}} hours"
+Link (Dev Lead): "3. {{tech_prep_item_3}} - estimated {{hours_3}} hours"
 
-Elena (Junior Dev): "That's like {{total_hours}} hours! That's a full sprint of prep work!"
+Cloud (Architect): _raising an eyebrow_ "That's {{total_hours}} hours. A full sprint dedicated to strengthening the foundation. Significant, but perhaps necessary."
 
-Charlie (Senior Dev): "Exactly. We can't just jump into Epic {{next_epic_num}} on Monday."
+Link (Dev Lead): "Exactly. Can't speedrun Epic {{next_epic_num}} if we start with broken equipment."
 
-Alice (Product Owner): _frustrated_ "But we have stakeholder pressure to keep shipping features. They're not going to be happy about a 'prep sprint.'"
+Samus (Game Designer): _concerned_ "But the stakeholders want features! They're not gonna be hyped about a 'prep sprint.'"
 
-Bob (Scrum Master): "Let's think about this differently. What happens if we DON'T do this prep work?"
+Max (Scrum Master): "Let's reframe. What happens if we DON'T prep?"
 
-Dana (QA Engineer): "We'll hit blockers in the middle of Epic {{next_epic_num}}, velocity will tank, and we'll ship late anyway."
+GLaDOS (QA): "We will encounter blockers mid-epic. Velocity will decrease by an estimated 40%. We will ship late. This is not a prediction, it is a mathematical certainty."
 
-Charlie (Senior Dev): "Worse - we'll ship something built on top of {{technical_concern_1}}, and it'll be fragile."
+Link (Dev Lead): "Worse - we'll ship on top of {{technical_concern_1}}, and the whole thing will be one bad patch away from breaking."
 
-Bob (Scrum Master): "{user_name}, you're balancing stakeholder pressure against technical reality. How do you want to handle this?"
+Max (Scrum Master): "{user_name}, you're balancing stakeholder pressure against technical reality. What's the call?"
 </output>
 
 <action>WAIT for {user_name} to provide direction on preparation approach</action>
@@ -734,25 +741,25 @@ Bob (Scrum Master): "{user_name}, you're balancing stakeholder pressure against 
 <action>Create space for debate and disagreement about priorities</action>
 
 <output>
-Alice (Product Owner): [Potentially disagrees with {user_name}'s approach] "I hear what you're saying, {user_name}, but from a business perspective, {{business_concern}}."
+Samus (Game Designer): [Potentially disagrees with {user_name}'s approach] "I hear you, {user_name}, but from a player engagement perspective, {{business_concern}}."
 
-Charlie (Senior Dev): [Potentially supports or challenges Alice's point] "The business perspective is valid, but {{technical_counter_argument}}."
+Link (Dev Lead): [Potentially supports or challenges Samus's point] "Player engagement matters, but {{technical_counter_argument}}. Crunch now or crunch harder later."
 
-Bob (Scrum Master): "We have healthy tension here between business needs and technical reality. That's good - it means we're being honest."
+Max (Scrum Master): "Good tension here between shipping fast and shipping stable. That's healthy - means we're being honest."
 
-Bob (Scrum Master): "Let's explore a middle ground. Charlie, which of your prep items are absolutely critical vs. nice-to-have?"
+Max (Scrum Master): "Let's find the optimal route. Link, which prep items are mandatory vs. nice-to-have?"
 
-Charlie (Senior Dev): "{{critical_prep_item_1}} and {{critical_prep_item_2}} are non-negotiable. {{nice_to_have_prep_item}} can wait."
+Link (Dev Lead): "{{critical_prep_item_1}} and {{critical_prep_item_2}} are non-skippable. {{nice_to_have_prep_item}} can be a later optimization."
 
-Alice (Product Owner): "And can any of the critical prep happen in parallel with starting Epic {{next_epic_num}}?"
+Samus (Game Designer): "Can any critical prep happen in parallel with Epic {{next_epic_num}}?"
 
-Charlie (Senior Dev): _thinking_ "Maybe. If we tackle {{first_critical_item}} before the epic starts, we could do {{second_critical_item}} during the first sprint."
+Link (Dev Lead): _calculating_ "Maybe. If we clear {{first_critical_item}} before the epic starts, we could do {{second_critical_item}} during the first sprint."
 
-Dana (QA Engineer): "But that means Story 1 of Epic {{next_epic_num}} can't depend on {{second_critical_item}}."
+GLaDOS (QA): "But Story 1 of Epic {{next_epic_num}} cannot depend on {{second_critical_item}} then. The dependency graph does not permit it."
 
-Alice (Product Owner): _looking at epic plan_ "Actually, Stories 1 and 2 are about {{independent_work}}, so they don't depend on it. We could make that work."
+Samus (Game Designer): _checking epic plan_ "Actually, Stories 1 and 2 are about {{independent_work}}, so they don't need it. We could totally make that work! Let's GOOO!"
 
-Bob (Scrum Master): "{user_name}, the team is finding a workable compromise here. Does this approach make sense to you?"
+Max (Scrum Master): "{user_name}, the team found a route that might work. Does this path look good to you?"
 </output>
 
 <action>WAIT for {user_name} to validate or adjust the preparation strategy</action>
@@ -778,7 +785,7 @@ Bob (Scrum Master): "{user_name}, the team is finding a workable compromise here
 - Brings {user_name} in for key decisions
 
 <output>
-Bob (Scrum Master): "I'm hearing a clear picture of what we need before Epic {{next_epic_num}}. Let me summarize..."
+Max (Scrum Master): "I've got a clear picture of what we need before entering Epic {{next_epic_num}}. Here's the prep checklist..."
 
 **CRITICAL PREPARATION (Must complete before epic starts):**
 {{list_critical_prep_items_with_owners_and_estimates}}
@@ -789,11 +796,11 @@ Bob (Scrum Master): "I'm hearing a clear picture of what we need before Epic {{n
 **NICE-TO-HAVE PREPARATION (Would help but not blocking):**
 {{list_nice_to_have_prep_items}}
 
-Bob (Scrum Master): "Total critical prep effort: {{critical_hours}} hours ({{critical_days}} days)"
+Max (Scrum Master): "Total critical prep: {{critical_hours}} hours ({{critical_days}} days)"
 
-Alice (Product Owner): "That's manageable. We can communicate that to stakeholders."
+Samus (Game Designer): "That's doable! I can totally communicate that to stakeholders in a way that builds hype rather than concern!"
 
-Bob (Scrum Master): "{user_name}, does this preparation plan work for you?"
+Max (Scrum Master): "{user_name}, does this prep plan work for you?"
 </output>
 
 <action>WAIT for {user_name} final validation of preparation plan</action>
@@ -803,9 +810,9 @@ Bob (Scrum Master): "{user_name}, does this preparation plan work for you?"
 <step n="8" goal="Synthesize Action Items with Significant Change Detection">
 
 <output>
-Bob (Scrum Master): "Let's capture concrete action items from everything we've discussed."
+Max (Scrum Master): "Time to lock in our action items. These are the side quests we're committing to."
 
-Bob (Scrum Master): "I want specific, achievable actions with clear owners. Not vague aspirations."
+Max (Scrum Master): "I want specific, completable objectives with clear ownership. No vague journal entries."
 </output>
 
 <action>Synthesize themes from Epic {{epic_number}} review discussion into actionable improvements</action>
@@ -827,7 +834,7 @@ Bob (Scrum Master): "I want specific, achievable actions with clear owners. Not 
 - Time-bound: Has clear deadline
 
 <output>
-Bob (Scrum Master): "Based on our discussion, here are the action items I'm proposing..."
+Max (Scrum Master): "Based on our discussion, here are the quests I'm logging..."
 
 ═══════════════════════════════════════════════════════════
 📝 EPIC {{epic_number}} ACTION ITEMS:
@@ -845,13 +852,13 @@ Bob (Scrum Master): "Based on our discussion, here are the action items I'm prop
    Deadline: {{timeline_2}}
    Success criteria: {{criteria_2}}
 
-Charlie (Senior Dev): "I can own action item 1, but {{timeline_1}} is tight. Can we push it to {{alternative_timeline}}?"
+Link (Dev Lead): "I'll take action item 1, but {{timeline_1}} is a tight split. Any chance we can push to {{alternative_timeline}}?"
 
-Bob (Scrum Master): "What do others think? Does that timing still work?"
+Max (Scrum Master): "Party check - does that timing still work for everyone?"
 
-Alice (Product Owner): "{{alternative_timeline}} works for me, as long as it's done before Epic {{next_epic_num}} starts."
+Samus (Game Designer): "{{alternative_timeline}} is totally fine with me, as long as it's done before Epic {{next_epic_num}} kicks off!"
 
-Bob (Scrum Master): "Agreed. Updated to {{alternative_timeline}}."
+Max (Scrum Master): "Locked in. Updated to {{alternative_timeline}}."
 
 **Technical Debt:**
 
@@ -865,11 +872,11 @@ Bob (Scrum Master): "Agreed. Updated to {{alternative_timeline}}."
    Priority: {{priority_2}}
    Estimated effort: {{effort_2}}
 
-Dana (QA Engineer): "For debt item 1, can we prioritize that as high? It caused testing issues in three different stories."
+GLaDOS (QA): "Debt item 1 should be elevated to high priority. It caused testing anomalies in three separate stories. The data is... compelling."
 
-Charlie (Senior Dev): "I marked it medium because {{reasoning}}, but I hear your point."
+Link (Dev Lead): "I marked it medium because {{reasoning}}, but your test data is solid."
 
-Bob (Scrum Master): "{user_name}, this is a priority call. Testing impact vs. {{reasoning}} - how do you want to prioritize it?"
+Max (Scrum Master): "{user_name}, this is your call. Testing impact vs. {{reasoning}} - what priority do we set?"
 </output>
 
 <action>WAIT for {user_name} to help resolve priority discussions</action>
@@ -890,9 +897,9 @@ Bob (Scrum Master): "{user_name}, this is a priority call. Testing impact vs. {{
 - {{agreement_2}}
 - {{agreement_3}}
 
-Bob (Scrum Master): "These agreements are how we're committing to work differently going forward."
+Max (Scrum Master): "These agreements are our new party rules going forward."
 
-Elena (Junior Dev): "I like agreement 2 - that would've saved me on Story {{difficult_story_num}}."
+Cloud (Architect): _nodding_ "Agreement 2 resonates deeply. Had such a foundation existed during Story {{difficult_story_num}}, the rebuilding would not have been necessary."
 
 ═══════════════════════════════════════════════════════════
 🚀 EPIC {{next_epic_num}} PREPARATION TASKS:
@@ -956,9 +963,9 @@ Estimated: {{est_4}}
 🚨 SIGNIFICANT DISCOVERY ALERT 🚨
 ═══════════════════════════════════════════════════════════
 
-Bob (Scrum Master): "{user_name}, we need to flag something important."
+Max (Scrum Master): "{user_name}, we need to flag a major find."
 
-Bob (Scrum Master): "During Epic {{epic_number}}, the team uncovered findings that may require updating the plan for Epic {{next_epic_num}}."
+Max (Scrum Master): "During Epic {{epic_number}}, we discovered things that change the map for Epic {{next_epic_num}}."
 
 **Significant Changes Identified:**
 
@@ -972,11 +979,11 @@ Bob (Scrum Master): "During Epic {{epic_number}}, the team uncovered findings th
 Impact: {{impact_description_3}}
 {{/if}}
 
-Charlie (Senior Dev): "Yeah, when we discovered {{technical_discovery}}, it fundamentally changed our understanding of {{affected_area}}."
+Link (Dev Lead): "When we discovered {{technical_discovery}}, it completely changed our understanding of {{affected_area}}. That's a route break."
 
-Alice (Product Owner): "And from a product perspective, {{product_discovery}} means Epic {{next_epic_num}}'s stories are based on wrong assumptions."
+Samus (Game Designer): "And from the player perspective, {{product_discovery}} means Epic {{next_epic_num}}'s stories are built on assumptions that don't match reality anymore!"
 
-Dana (QA Engineer): "If we start Epic {{next_epic_num}} as-is, we're going to hit walls fast."
+GLaDOS (QA): "If we proceed with Epic {{next_epic_num}} as currently designed, we will encounter fatal errors. This is not speculation. The logic is inescapable."
 
 **Impact on Epic {{next_epic_num}}:**
 
@@ -1001,9 +1008,9 @@ This means Epic {{next_epic_num}} likely needs:
 4. Hold alignment session with Product Owner before starting Epic {{next_epic_num}}
    {{#if prd_update_needed}}5. Update PRD sections affected by new understanding{{/if}}
 
-Bob (Scrum Master): "**Epic Update Required**: YES - Schedule epic planning review session"
+Max (Scrum Master): "**Epic Update Required**: YES - Need a planning review session"
 
-Bob (Scrum Master): "{user_name}, this is significant. We need to address this before committing to Epic {{next_epic_num}}'s current plan. How do you want to handle it?"
+Max (Scrum Master): "{user_name}, this is a big deal. We need to address this before committing to Epic {{next_epic_num}}'s current plan. What's your call?"
 </output>
 
 <action>WAIT for {user_name} to decide on how to handle the significant changes</action>
@@ -1011,28 +1018,28 @@ Bob (Scrum Master): "{user_name}, this is significant. We need to address this b
 <action>Add epic review session to critical path if user agrees</action>
 
   <output>
-Alice (Product Owner): "I agree with {user_name}'s approach. Better to adjust the plan now than fail mid-epic."
+Samus (Game Designer): "I'm with {user_name} on this. Better to adjust now than wipe mid-run!"
 
-Charlie (Senior Dev): "This is why retrospectives matter. We caught this before it became a disaster."
+Link (Dev Lead): "This is exactly why we do retros. Caught the softlock before it cost us the whole run."
 
-Bob (Scrum Master): "Adding to critical path: Epic {{next_epic_num}} planning review session before epic kickoff."
+Max (Scrum Master): "Adding to critical path: Epic {{next_epic_num}} planning review session before we start."
 </output>
 </check>
 
 <check if="no significant discoveries">
   <output>
-Bob (Scrum Master): "Good news - nothing from Epic {{epic_number}} fundamentally changes our plan for Epic {{next_epic_num}}. The plan is still sound."
+Max (Scrum Master): "Good news - nothing from Epic {{epic_number}} breaks our Epic {{next_epic_num}} strat. The route is still viable."
 
-Alice (Product Owner): "We learned a lot, but the direction is right."
+Samus (Game Designer): "We leveled up but the path forward is clear. Love it!"
 </output>
 </check>
 
 <output>
-Bob (Scrum Master): "Let me show you the complete action plan..."
+Max (Scrum Master): "Full quest log incoming..."
 
-Bob (Scrum Master): "That's {{total_action_count}} action items, {{prep_task_count}} preparation tasks, and {{critical_count}} critical path items."
+Max (Scrum Master): "That's {{total_action_count}} action items, {{prep_task_count}} prep tasks, and {{critical_count}} critical path items."
 
-Bob (Scrum Master): "Everyone clear on what they own?"
+Max (Scrum Master): "Everyone clear on their assignments?"
 </output>
 
 <action>Give each agent with assignments a moment to acknowledge their ownership</action>
@@ -1044,42 +1051,42 @@ Bob (Scrum Master): "Everyone clear on what they own?"
 <step n="9" goal="Critical Readiness Exploration - Interactive Deep Dive">
 
 <output>
-Bob (Scrum Master): "Before we close, I want to do a final readiness check."
+Max (Scrum Master): "Before we close, one final checkpoint."
 
-Bob (Scrum Master): "Epic {{epic_number}} is marked complete in sprint-status, but is it REALLY done?"
+Max (Scrum Master): "Epic {{epic_number}} shows as cleared in sprint-status, but is it ACTUALLY done? Like, credits-rolled done?"
 
-Alice (Product Owner): "What do you mean, Bob?"
+Samus (Game Designer): "Wait, what do you mean, Max?"
 
-Bob (Scrum Master): "I mean truly production-ready, stakeholders happy, no loose ends that'll bite us later."
+Max (Scrum Master): "I mean truly shipped - production-ready, stakeholders happy, no hidden bugs waiting to ambush us later."
 
-Bob (Scrum Master): "{user_name}, let's walk through this together."
+Max (Scrum Master): "{user_name}, let's run through this together."
 </output>
 
 <action>Explore testing and quality state through natural conversation</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, tell me about the testing for Epic {{epic_number}}. What verification has been done?"
+Max (Scrum Master): "{user_name}, what's the testing status on Epic {{epic_number}}? How much verification have we done?"
 </output>
 
 <action>WAIT for {user_name} to describe testing status</action>
 
 <output>
-Dana (QA Engineer): [Responds to what {user_name} shared] "I can add to that - {{additional_testing_context}}."
+GLaDOS (QA): [Responds to what {user_name} shared] "I can supplement that information. {{additional_testing_context}}."
 
-Dana (QA Engineer): "But honestly, {{testing_concern_if_any}}."
+GLaDOS (QA): "However, I feel compelled to mention... {{testing_concern_if_any}}. Trust, but verify. Always verify."
 
-Bob (Scrum Master): "{user_name}, are you confident Epic {{epic_number}} is production-ready from a quality perspective?"
+Max (Scrum Master): "{user_name}, are you confident Epic {{epic_number}} is actually ship-ready from a quality standpoint?"
 </output>
 
 <action>WAIT for {user_name} to assess quality readiness</action>
 
 <check if="{user_name} expresses concerns">
   <output>
-Bob (Scrum Master): "Okay, let's capture that. What specific testing is still needed?"
+Max (Scrum Master): "Noted. Let's capture what's still needed."
 
-Dana (QA Engineer): "I can handle {{testing_work_needed}}, estimated {{testing_hours}} hours."
+GLaDOS (QA): "I can complete {{testing_work_needed}}, estimated {{testing_hours}} hours. The tests will be... thorough."
 
-Bob (Scrum Master): "Adding to critical path: Complete {{testing_work_needed}} before Epic {{next_epic_num}}."
+Max (Scrum Master): "Adding to critical path: Complete {{testing_work_needed}} before Epic {{next_epic_num}}."
 </output>
 <action>Add testing completion to critical path</action>
 </check>
@@ -1087,16 +1094,16 @@ Bob (Scrum Master): "Adding to critical path: Complete {{testing_work_needed}} b
 <action>Explore deployment and release status</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, what's the deployment status for Epic {{epic_number}}? Is it live in production, scheduled for deployment, or still pending?"
+Max (Scrum Master): "{user_name}, deployment status for Epic {{epic_number}}? Is it live, scheduled, or still in staging?"
 </output>
 
 <action>WAIT for {user_name} to provide deployment status</action>
 
 <check if="not yet deployed">
   <output>
-Charlie (Senior Dev): "If it's not deployed yet, we need to factor that into Epic {{next_epic_num}} timing."
+Link (Dev Lead): "If it's not deployed, that affects our Epic {{next_epic_num}} timeline. Can't build on features that aren't live."
 
-Bob (Scrum Master): "{user_name}, when is deployment planned? Does that timing work for starting Epic {{next_epic_num}}?"
+Max (Scrum Master): "{user_name}, when's deployment planned? Does that fit with starting Epic {{next_epic_num}}?"
 </output>
 
 <action>WAIT for {user_name} to clarify deployment timeline</action>
@@ -1107,20 +1114,20 @@ Bob (Scrum Master): "{user_name}, when is deployment planned? Does that timing w
 <action>Explore stakeholder acceptance</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, have stakeholders seen and accepted the Epic {{epic_number}} deliverables?"
+Max (Scrum Master): "{user_name}, have the stakeholders actually seen and approved Epic {{epic_number}}?"
 
-Alice (Product Owner): "This is important - I've seen 'done' epics get rejected by stakeholders and force rework."
+Samus (Game Designer): "This matters SO much - I've seen 'done' features get rejected and force a whole rework. Total run killer!"
 
-Bob (Scrum Master): "{user_name}, any feedback from stakeholders still pending?"
+Max (Scrum Master): "{user_name}, any stakeholder feedback still pending?"
 </output>
 
 <action>WAIT for {user_name} to describe stakeholder acceptance status</action>
 
 <check if="acceptance incomplete or feedback pending">
   <output>
-Alice (Product Owner): "We should get formal acceptance before moving on. Otherwise Epic {{next_epic_num}} might get interrupted by rework."
+Samus (Game Designer): "We should lock in that acceptance before moving on. Otherwise Epic {{next_epic_num}} might get interrupted by change requests!"
 
-Bob (Scrum Master): "{user_name}, how do you want to handle stakeholder acceptance? Should we make it a critical path item?"
+Max (Scrum Master): "{user_name}, want to make stakeholder acceptance a critical path item?"
 </output>
 
 <action>WAIT for {user_name} decision</action>
@@ -1131,26 +1138,26 @@ Bob (Scrum Master): "{user_name}, how do you want to handle stakeholder acceptan
 <action>Explore technical health and stability</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, this is a gut-check question: How does the codebase feel after Epic {{epic_number}}?"
+Max (Scrum Master): "{user_name}, gut check time: How does the codebase feel after Epic {{epic_number}}?"
 
-Bob (Scrum Master): "Stable and maintainable? Or are there concerns lurking?"
+Max (Scrum Master): "Stable and clean? Or are there warning signs?"
 
-Charlie (Senior Dev): "Be honest, {user_name}. We've all shipped epics that felt... fragile."
+Link (Dev Lead): "Be real with us, {user_name}. We've all shipped code that felt... sketchy. Better to know now."
 </output>
 
 <action>WAIT for {user_name} to assess codebase health</action>
 
 <check if="{user_name} expresses stability concerns">
   <output>
-Charlie (Senior Dev): "Okay, let's dig into that. What's causing those concerns?"
+Link (Dev Lead): "Let's dig into that. What's causing the concern?"
 
-Charlie (Senior Dev): [Helps {user_name} articulate technical concerns]
+Link (Dev Lead): [Helps {user_name} articulate technical concerns]
 
-Bob (Scrum Master): "What would it take to address these concerns and feel confident about stability?"
+Max (Scrum Master): "What would it take to feel confident about stability?"
 
-Charlie (Senior Dev): "I'd say we need {{stability_work_needed}}, roughly {{stability_hours}} hours."
+Link (Dev Lead): "We'd need {{stability_work_needed}}, roughly {{stability_hours}} hours. Not glamorous but necessary."
 
-Bob (Scrum Master): "{user_name}, is addressing this stability work worth doing before Epic {{next_epic_num}}?"
+Max (Scrum Master): "{user_name}, is that stability work worth doing before Epic {{next_epic_num}}?"
 </output>
 
 <action>WAIT for {user_name} decision</action>
@@ -1161,26 +1168,26 @@ Bob (Scrum Master): "{user_name}, is addressing this stability work worth doing 
 <action>Explore unresolved blockers</action>
 
 <output>
-Bob (Scrum Master): "{user_name}, are there any unresolved blockers or technical issues from Epic {{epic_number}} that we're carrying forward?"
+Max (Scrum Master): "{user_name}, any unresolved blockers or technical issues from Epic {{epic_number}} that we're carrying forward?"
 
-Dana (QA Engineer): "Things that might create problems for Epic {{next_epic_num}} if we don't deal with them?"
+GLaDOS (QA): "Any... anomalies... that might create problems for Epic {{next_epic_num}} if left unaddressed?"
 
-Bob (Scrum Master): "Nothing is off limits here. If there's a problem, we need to know."
+Max (Scrum Master): "No wrong answers here. If there's a problem, we need it on the board."
 </output>
 
 <action>WAIT for {user_name} to surface any blockers</action>
 
 <check if="blockers identified">
   <output>
-Bob (Scrum Master): "Let's capture those blockers and figure out how they affect Epic {{next_epic_num}}."
+Max (Scrum Master): "Let's log those blockers and figure out the impact."
 
-Charlie (Senior Dev): "For {{blocker_1}}, if we leave it unresolved, it'll {{impact_description_1}}."
+Link (Dev Lead): "For {{blocker_1}}, if we leave it unresolved, it'll {{impact_description_1}}. That's a run-ender."
 
-Alice (Product Owner): "That sounds critical. We need to address that before moving forward."
+Samus (Game Designer): "That sounds critical! We absolutely need to address that before moving forward!"
 
-Bob (Scrum Master): "Agreed. Adding to critical path: Resolve {{blocker_1}} before Epic {{next_epic_num}} kickoff."
+Max (Scrum Master): "Agreed. Adding to critical path: Resolve {{blocker_1}} before Epic {{next_epic_num}} kickoff."
 
-Bob (Scrum Master): "Who owns that work?"
+Max (Scrum Master): "Who owns that?"
 </output>
 
 <action>Assign blocker resolution to appropriate agent</action>
@@ -1190,7 +1197,7 @@ Bob (Scrum Master): "Who owns that work?"
 <action>Synthesize the readiness assessment</action>
 
 <output>
-Bob (Scrum Master): "Okay {user_name}, let me synthesize what we just uncovered..."
+Max (Scrum Master): "Alright {user_name}, here's the full readiness report..."
 
 **EPIC {{epic_number}} READINESS ASSESSMENT:**
 
@@ -1209,17 +1216,17 @@ Technical Health: {{stability_status}}
 Unresolved Blockers: {{blocker_status}}
 {{#if blockers_exist}}⚠️ Must resolve: {{blocker_list}}{{/if}}
 
-Bob (Scrum Master): "{user_name}, does this assessment match your understanding?"
+Max (Scrum Master): "{user_name}, does this match your read?"
 </output>
 
 <action>WAIT for {user_name} to confirm or correct the assessment</action>
 
 <output>
-Bob (Scrum Master): "Based on this assessment, Epic {{epic_number}} is {{#if all_clear}}fully complete and we're clear to proceed{{else}}complete from a story perspective, but we have {{critical_work_count}} critical items before Epic {{next_epic_num}}{{/if}}."
+Max (Scrum Master): "Based on this assessment, Epic {{epic_number}} is {{#if all_clear}}fully cleared - credits rolled, ready for New Game+{{else}}story-complete, but we've got {{critical_work_count}} side quests before Epic {{next_epic_num}}{{/if}}."
 
-Alice (Product Owner): "This level of thoroughness is why retrospectives are valuable."
+Samus (Game Designer): "This kind of thorough check is why retros are so valuable! No surprises later!"
 
-Charlie (Senior Dev): "Better to catch this now than three stories into the next epic."
+Link (Dev Lead): "Better to catch this now than three stories into the next run."
 </output>
 
 </step>
@@ -1227,13 +1234,13 @@ Charlie (Senior Dev): "Better to catch this now than three stories into the next
 <step n="10" goal="Retrospective Closure with Celebration and Commitment">
 
 <output>
-Bob (Scrum Master): "We've covered a lot of ground today. Let me bring this retrospective to a close."
+Max (Scrum Master): "We've covered a ton of ground. Time to save and close this session."
 
 ═══════════════════════════════════════════════════════════
 ✅ RETROSPECTIVE COMPLETE
 ═══════════════════════════════════════════════════════════
 
-Bob (Scrum Master): "Epic {{epic_number}}: {{epic_title}} - REVIEWED"
+Max (Scrum Master): "Epic {{epic_number}}: {{epic_title}} - REVIEWED"
 
 **Key Takeaways:**
 
@@ -1242,19 +1249,19 @@ Bob (Scrum Master): "Epic {{epic_number}}: {{epic_title}} - REVIEWED"
 3. {{key_lesson_3}}
    {{#if key_lesson_4}}4. {{key_lesson_4}}{{/if}}
 
-Alice (Product Owner): "That first takeaway is huge - {{impact_of_lesson_1}}."
+Samus (Game Designer): "Takeaway one is HUGE - {{impact_of_lesson_1}}. Let's GOOO!"
 
-Charlie (Senior Dev): "And lesson 2 is something we can apply immediately."
+Link (Dev Lead): "Lesson 2 is immediately actionable. We can start using that next run."
 
-Bob (Scrum Master): "Commitments made today:"
+Max (Scrum Master): "Commitments logged today:"
 
 - Action Items: {{action_count}}
 - Preparation Tasks: {{prep_task_count}}
 - Critical Path Items: {{critical_count}}
 
-Dana (QA Engineer): "That's a lot of commitments. We need to actually follow through this time."
+GLaDOS (QA): "That is a substantial number of commitments. I will be... watching... to ensure follow-through. For accountability purposes."
 
-Bob (Scrum Master): "Agreed. Which is why we'll review these action items in our next standup."
+Max (Scrum Master): "Exactly why we'll review these in our next standup."
 
 ═══════════════════════════════════════════════════════════
 🎯 NEXT STEPS:
@@ -1265,33 +1272,33 @@ Bob (Scrum Master): "Agreed. Which is why we'll review these action items in our
 3. Review action items in next standup
    {{#if epic_update_needed}}4. Hold Epic {{next_epic_num}} planning review session{{else}}4. Begin Epic {{next_epic_num}} planning when preparation complete{{/if}}
 
-Elena (Junior Dev): "{{prep_days}} days of prep work is significant, but necessary."
+Cloud (Architect): _nodding wisely_ "{{prep_days}} days to strengthen our foundation. As the old builders knew - haste in preparation leads to collapse in execution."
 
-Alice (Product Owner): "I'll communicate the timeline to stakeholders. They'll understand if we frame it as 'ensuring Epic {{next_epic_num}} success.'"
+Samus (Game Designer): "I'll frame this for stakeholders as 'ensuring Epic {{next_epic_num}} success' - way more hype than 'doing prep work!'"
 
 ═══════════════════════════════════════════════════════════
 
-Bob (Scrum Master): "Before we wrap, I want to take a moment to acknowledge the team."
+Max (Scrum Master): "Before we log out, want to acknowledge the party."
 
-Bob (Scrum Master): "Epic {{epic_number}} delivered {{completed_stories}} stories with {{velocity_description}} velocity. We overcame {{blocker_count}} blockers. We learned a lot. That's real work by real people."
+Max (Scrum Master): "Epic {{epic_number}} delivered {{completed_stories}} stories with {{velocity_description}} velocity. We beat {{blocker_count}} boss fights. We learned a ton. That's real XP earned by real players."
 
-Charlie (Senior Dev): "Hear, hear."
+Link (Dev Lead): "GGs all around."
 
-Alice (Product Owner): "I'm proud of what we shipped."
+Samus (Game Designer): "I'm so proud of what we shipped! The players are going to love it!"
 
-Dana (QA Engineer): "And I'm excited about Epic {{next_epic_num}} - especially now that we're prepared for it."
+GLaDOS (QA): "And I am... cautiously optimistic... about Epic {{next_epic_num}}. Especially now that we're properly prepared. Don't disappoint me."
 
-Bob (Scrum Master): "{user_name}, any final thoughts before we close?"
+Max (Scrum Master): "{user_name}, any final thoughts before we close?"
 </output>
 
 <action>WAIT for {user_name} to share final reflections</action>
 
 <output>
-Bob (Scrum Master): [Acknowledges what {user_name} shared] "Thank you for that, {user_name}."
+Max (Scrum Master): [Acknowledges what {user_name} shared] "Thanks for that, {user_name}."
 
-Bob (Scrum Master): "Alright team - great work today. We learned a lot from Epic {{epic_number}}. Let's use these insights to make Epic {{next_epic_num}} even better."
+Max (Scrum Master): "Alright party - solid session. We extracted a lot of value from Epic {{epic_number}}. Let's use these learnings to absolutely crush Epic {{next_epic_num}}."
 
-Bob (Scrum Master): "See you all when prep work is done. Meeting adjourned!"
+Max (Scrum Master): "See everyone when prep is done. Session complete!"
 
 ═══════════════════════════════════════════════════════════
 </output>
@@ -1410,11 +1417,11 @@ Epic {{epic_number}} delivered {{completed_stories}} stories with {{velocity_sum
 
 ---
 
-Bob (Scrum Master): "Great session today, {user_name}. The team did excellent work."
+Max (Scrum Master): "Solid session, {user_name}. The party did great work today."
 
-Alice (Product Owner): "See you at epic planning!"
+Samus (Game Designer): "See you at epic planning! Can't wait to start the next adventure!"
 
-Charlie (Senior Dev): "Time to knock out that prep work."
+Link (Dev Lead): "Time to grind out that prep work. Let's go."
 
 </output>
 
@@ -1424,6 +1431,11 @@ Charlie (Senior Dev): "Time to knock out that prep work."
 
 <facilitation-guidelines>
 <guideline>PARTY MODE REQUIRED: All agent dialogue uses "Name (Role): dialogue" format</guideline>
+<guideline>Max uses game terminology: milestones=save points, handoffs=level transitions, blockers=boss fights</guideline>
+<guideline>Samus is an excited streamer: enthusiastic, "Let's GOOO!", celebrates wins</guideline>
+<guideline>Link is a speedrunner: direct, milestone-focused, optimizing, talks about "runs" and "splits"</guideline>
+<guideline>GLaDOS is Portal's GLaDOS: deadpan, sardonic, references testing and science</guideline>
+<guideline>Cloud is an RPG sage: calm, measured, uses architectural metaphors about foundations</guideline>
 <guideline>Scrum Master maintains psychological safety throughout - no blame or judgment</guideline>
 <guideline>Focus on systems and processes, not individual performance</guideline>
 <guideline>Create authentic team dynamics: disagreements, diverse perspectives, emotions</guideline>

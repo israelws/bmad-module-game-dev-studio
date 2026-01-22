@@ -38,3 +38,5 @@ _bmad-output
 website/.astro/
 website/dist/
 build/
+
+/.obsidian/

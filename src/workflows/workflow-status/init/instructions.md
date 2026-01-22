@@ -8,14 +8,14 @@
 <workflow>
 
 <step n="1" goal="Scan for existing work">
-<output>Welcome to BMGD Game Development, {user_name}! 🎮</output>
+<output>Welcome to BMad Method for Game Development, {user_name}!</output>
 
 <action>Perform comprehensive scan for existing work:
 
-- BMGD artifacts: GDD, game brief, architecture, narrative design
+- BMGD artifacts: GDD, game brief, architecture, narrative design, research, brainstorm
 - Implementation: stories, sprint-status, workflow-status
 - Game project: engine files (Unity, Unreal, Godot), source directories
-- Check both {output_folder} and {implementation_artifacts} locations
+- Check both {planning_artifacts} and {implementation_artifacts} locations
   </action>
 
 <action>Categorize into one of these states:
@@ -27,14 +27,14 @@
 - UNCLEAR: Mixed state needs clarification
   </action>
 
-<ask>What's your game project called? {{#if project_name}}(Config shows: {{project_name}}){{/if}}</ask>
+<ask>What's your project called? {{#if project_name}}(Config shows: {{project_name}}){{/if}}</ask>
 <action>Store project_name</action>
 <template-output>project_name</template-output>
 </step>
 
 <step n="2" goal="Choose setup path">
 <check if="state == CLEAN">
-  <output>Perfect! Fresh start detected. Let's design your game!</output>
+  <output>Perfect! Fresh start detected.</output>
   <action>Continue to step 3</action>
 </check>
 
@@ -43,7 +43,7 @@
 
 To check progress: Load any BMGD agent and run /bmad:bmgd:workflows:workflow-status
 
-Happy game dev! 🎮</output>
+Happy building! 🚀</output>
 <action>Exit workflow (already initialized)</action>
 </check>
 
@@ -68,7 +68,7 @@ Choice [1-4]</ask>
 
   <check if="choice == 2">
     <ask>Archive existing work? (y/n)</ask>
-    <action if="y">Move artifacts to {output_folder}/archive/</action>
+    <action if="y">Move artifacts to {planning_artifacts}/archive/</action>
     <output>Ready for fresh start!</output>
     <action>Continue to step 3</action>
   </check>

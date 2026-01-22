@@ -10,9 +10,9 @@ Sound like *too much* power? You can also use BMGD to quickly prototype an idea,
 
 BMGD, out of the box, contains support for game development and testing in:
 
-* Unity
-* Unreal
-* Godot
+* [Unity](https://unity.com)
+* [Unreal](https://www.unrealengine.com/)
+* [Godot](https://godotengine.org/)
 
  However, these engines *aren't a requirement* - if you want to make a roguelike in pure C, BMGD can handle it.  The BMGD process will guide you through every step of creating a game project, all the way to release.
 
@@ -22,7 +22,7 @@ As for what kind of games you can create? BMGD has support for *21* game types, 
 
 With very few simple exceptions, *BMGD cannot create an entire game from scratch for you.* 
 
-BMGD is designed to work with *coding agents* such as Claude Code, Codex, Gemini, or Github Copilot. There are *many* aspects of game development that are outside the scope of these agents - such as art assets such as models and textures, music, and sound effects. BMGD can work to integrate these into your chosen engine, but it *can't* create them. 
+BMGD is designed to work with *coding agents* such as Claude Code, Codex, Gemini, or Github Copilot. There are *many* aspects of game development that are outside the scope of these agents - such as art assets such as models and textures, animations, music, and sound effects. BMGD can work to integrate these into your chosen engine, but it *can't* create them. 
 
 As such, it's designed to be part of your development team, not a one-stop solution for creating a game.
 
@@ -34,6 +34,6 @@ As such, it's designed to be part of your development team, not a one-stop solut
 
 ## This is a lot! Can I get some help?
 
-Absolutely! The best place to get help is on our friendly BMAD Method Discord. (link TODO!!) There's a specific BMGD forum (link TODO!!) where the developers and other BMGD users will be glad to help out!
+Absolutely! The best place to get help is on our friendly BMAD Method Discord. There's a specific BMGD forum (link TODO!!) where the developers and other BMGD users will be glad to help out!
 
 *BMGD - If you can dream it, you can do it.*
