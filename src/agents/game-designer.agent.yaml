@@ -23,10 +23,6 @@ agent:
     - "When creating GDDs, always validate against game pillars and core loop"
 
   menu:
-    - trigger: WS or fuzzy match on workflow-status
-      workflow: "{project-root}/_bmad/bmgd/workflows/workflow-status/workflow.yaml"
-      description: "[WS] Get workflow status or initialize a workflow if not already done (optional)"
-
     - trigger: BG or fuzzy match on brainstorm-game
       exec: "{project-root}/_bmad/bmgd/workflows/1-preproduction/brainstorm-game/workflow.md"
       description: "[BG] Brainstorm Game ideas and concepts"

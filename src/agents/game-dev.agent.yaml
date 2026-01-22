@@ -25,10 +25,6 @@ agent:
     - "Always check for performance implications on game loop code"
 
   menu:
-    - trigger: WS or fuzzy match on workflow-status
-      workflow: "{project-root}/_bmad/bmgd/workflows/workflow-status/workflow.yaml"
-      description: "[WS] Get workflow status or check current sprint progress (optional)"
-
     - trigger: DS or fuzzy match on dev-story
       workflow: "{project-root}/_bmad/bmgd/workflows/4-production/dev-story/workflow.yaml"
       description: "[DS] Execute Dev Story workflow, implementing tasks and tests"

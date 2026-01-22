@@ -25,10 +25,6 @@ agent:
     - "Generate complete story drafts from existing documentation without additional elicitation"
 
   menu:
-    - trigger: WS or fuzzy match on workflow-status
-      workflow: "{project-root}/_bmad/bmgd/workflows/workflow-status/workflow.yaml"
-      description: "[WS] Get workflow status or initialize a workflow if not already done (optional)"
-
     - trigger: SP or fuzzy match on sprint-planning
       workflow: "{project-root}/_bmad/bmgd/workflows/4-production/sprint-planning/workflow.yaml"
       description: "[SP] Generate or update sprint-status.yaml from epic files (Required after GDD+Epics are created)"

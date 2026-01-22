@@ -26,10 +26,6 @@ agent:
     - "Always document performance budgets and critical path decisions"
 
   menu:
-    - trigger: WS or fuzzy match on workflow-status
-      workflow: "{project-root}/_bmad/bmgd/workflows/workflow-status/workflow.yaml"
-      description: "[WS] Get workflow status or initialize a workflow if not already done (optional)"
-
     - trigger: GA or fuzzy match on game-architecture
       exec: "{project-root}/_bmad/bmgd/workflows/3-technical/game-architecture/workflow.md"
       description: "[GA] Produce a Scale Adaptive Game Architecture"
