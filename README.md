@@ -112,4 +112,8 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 **BMad Game Dev Studio** — Part of the [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD) ecosystem.
 
+[![Contributors](https://contrib.rocks/image?repo=bmad-code-org/bmad-module-game-dev-studio)](https://github.com/bmad-code-org/bmad-module-game-dev-studio/graphs/contributors)
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for contributor information.
+
 *If you can dream it, you can build it.*
