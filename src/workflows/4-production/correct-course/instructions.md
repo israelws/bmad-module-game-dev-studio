@@ -2,10 +2,10 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {project-root}/_bmad/gds/workflows/4-production/correct-course/workflow.yaml</critical>
-<critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
+<critical>Communicate all responses in {communication_language} and language MUST be tailored to {game_dev_experience}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 
-<critical>DOCUMENT OUTPUT: Updated epics, stories, or PRD sections. Clear, actionable changes. User skill level ({user_skill_level}) affects conversation style ONLY, not document updates.</critical>
+<critical>DOCUMENT OUTPUT: Updated epics, stories, or PRD sections. Clear, actionable changes. User skill level ({game_dev_experience}) affects conversation style ONLY, not document updates.</critical>
 
 <workflow>
 

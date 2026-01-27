@@ -1,7 +1,7 @@
 <workflow>
   <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
   <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-  <critical>Communicate all responses in {communication_language} and language MUST be tailored to {user_skill_level}</critical>
+  <critical>Communicate all responses in {communication_language} and language MUST be tailored to {game_dev_experience}</critical>
   <critical>Generate all documents in {document_output_language}</critical>
   <critical>Only modify the story file in these areas: Tasks/Subtasks checkboxes, Dev Agent Record (Debug Log, Completion Notes), File List,
     Change Log, and Status</critical>
@@ -10,7 +10,7 @@
     until the story is COMPLETE (all ACs satisfied and all tasks/subtasks checked) UNLESS a HALT condition is triggered or the USER gives
     other instruction.</critical>
   <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition applies. Only Step 6 decides completion.</critical>
-  <critical>User skill level ({user_skill_level}) affects conversation style ONLY, not code updates.</critical>
+  <critical>User skill level ({game_dev_experience}) affects conversation style ONLY, not code updates.</critical>
 
   <step n="1" goal="Find next ready story and load it" tag="sprint-status">
     <check if="{{story_path}} is provided">
@@ -378,7 +378,7 @@
     <action>Summarize key accomplishments: story ID, story key, title, key changes made, tests added, files modified</action>
     <action>Provide the story file path and current status (now "review")</action>
 
-    <action>Based on {user_skill_level}, ask if user needs any explanations about:
+    <action>Based on {game_dev_experience}, ask if user needs any explanations about:
       - What was implemented and how it works
       - Why certain technical decisions were made
       - How to test or verify the changes
@@ -387,7 +387,7 @@
     </action>
 
     <check if="user asks for explanations">
-      <action>Provide clear, contextual explanations tailored to {user_skill_level}</action>
+      <action>Provide clear, contextual explanations tailored to {game_dev_experience}</action>
       <action>Use examples and references to specific code when helpful</action>
     </check>
 

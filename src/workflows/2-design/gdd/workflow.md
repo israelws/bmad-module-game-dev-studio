@@ -53,7 +53,7 @@ This uses **step-file architecture** for disciplined execution:
 Load and read full config from {main_config} and resolve:
 
 - `project_name`, `output_folder`, `user_name`
-- `communication_language`, `document_output_language`, `user_skill_level`
+- `communication_language`, `document_output_language`, `game_dev_experience`
 - `date` as system-generated current datetime
 
 ### 2. First Step EXECUTION

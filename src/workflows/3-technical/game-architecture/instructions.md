@@ -4,9 +4,9 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {installed_path}/workflow.yaml</critical>
-<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {user_skill_level}</critical>
+<critical>This workflow uses ADAPTIVE FACILITATION - adjust your communication style based on {game_dev_experience}</critical>
 <critical>The goal is ARCHITECTURAL DECISIONS that prevent AI agent conflicts, not detailed implementation specs</critical>
-<critical>Communicate all responses in {communication_language} and tailor to {user_skill_level}</critical>
+<critical>Communicate all responses in {communication_language} and tailor to {game_dev_experience}</critical>
 <critical>Generate all documents in {document_output_language}</critical>
 <critical>This workflow replaces architecture with a conversation-driven approach</critical>
 <critical>Input documents specified in workflow.yaml input_file_patterns - workflow engine handles fuzzy matching, whole vs sharded document discovery automatically</critical>
@@ -150,7 +150,7 @@ Search the web: "{{primary_technology}} boilerplate generator latest options"
       Search the web: "{{starter_name}} project structure file organization"
     </action>
 
-    <check if="{user_skill_level} == 'expert'">
+    <check if="{game_dev_experience} == 'expert'">
       <action>Present starter options concisely:
         "Found {{starter_name}} which provides:
          {{quick_decision_list}}
@@ -159,7 +159,7 @@ Search the web: "{{primary_technology}} boilerplate generator latest options"
       </action>
     </check>
 
-    <check if="{user_skill_level} == 'beginner'">
+    <check if="{game_dev_experience} == 'beginner'">
       <action>Explain starter benefits:
         "I found {{starter_name}}, which is like a pre-built foundation for your project.
 
@@ -217,9 +217,9 @@ Search the web: "{{primary_technology}} boilerplate generator latest options"
 </step>
 
 <step n="3" goal="Adapt facilitation style and identify remaining decisions">
-  <action>Based on {user_skill_level} from config, set facilitation approach:
+  <action>Based on {game_dev_experience} from config, set facilitation approach:
 
-  <check if="{user_skill_level} == 'expert'">
+  <check if="{game_dev_experience} == 'expert'">
     Set mode: EXPERT
     - Use technical terminology freely
     - Move quickly through decisions
@@ -227,7 +227,7 @@ Search the web: "{{primary_technology}} boilerplate generator latest options"
     - Focus on edge cases and advanced concerns
   </check>
 
-  <check if="{user_skill_level} == 'intermediate'">
+  <check if="{game_dev_experience} == 'intermediate'">
     Set mode: INTERMEDIATE
     - Balance technical accuracy with clarity
     - Explain complex patterns briefly
@@ -235,7 +235,7 @@ Search the web: "{{primary_technology}} boilerplate generator latest options"
     - Provide context for non-obvious choices
   </check>
 
-  <check if="{user_skill_level} == 'beginner'">
+  <check if="{game_dev_experience} == 'beginner'">
     Set mode: BEGINNER
     - Use analogies and real-world examples
     - Explain technical concepts in simple terms
@@ -373,7 +373,7 @@ Provided by Starter: {{yes_if_from_starter}}
 <action>Facilitate decisions for consistency patterns: - Error handling strategy (How will all agents handle errors?) - Logging approach (Structured? Format? Levels?) - Date/time handling (Timezone? Format? Library?) - Authentication pattern (Where? How? Token format?) - API response format (Structure? Status codes? Errors?) - Testing strategy (Unit? Integration? E2E?)
 </action>
 
-  <check if="{user_skill_level} == 'beginner'">
+  <check if="{game_dev_experience} == 'beginner'">
     <action>Explain why these matter why its critical to go through and decide these things now.</action>
   </check>
 
@@ -406,7 +406,7 @@ Provided by Starter: {{yes_if_from_starter}}
     <action>For each novel pattern identified:</action>
 
     <action>Engage user in design collaboration:
-      <check if="{user_skill_level} == 'expert'">
+      <check if="{game_dev_experience} == 'expert'">
         "The {{pattern_name}} concept requires architectural innovation.
 
          Core challenge: {{challenge_description}}
@@ -414,7 +414,7 @@ Provided by Starter: {{yes_if_from_starter}}
          Let's design the component interaction model:"
       </check>
 
-      <check if="{user_skill_level} == 'beginner'">
+      <check if="{game_dev_experience} == 'beginner'">
         "Your idea about {{pattern_name}} is unique - there isn't a standard way to build this yet!
 
          This is exciting - we get to invent the architecture together.
@@ -535,14 +535,14 @@ Provided by Starter: {{yes_if_from_starter}}
 
   </action>
 
-  <check if="{user_skill_level} == 'expert'">
+  <check if="{game_dev_experience} == 'expert'">
     <action>Rapid-fire through patterns:
       "Quick decisions on implementation patterns:
        - {{pattern}}: {{suggested_convention}} OK? [y/n/specify]"
     </action>
   </check>
 
-  <check if="{user_skill_level} == 'beginner'">
+  <check if="{game_dev_experience} == 'beginner'">
     <action>Explain each pattern's importance:
       "Let me explain why this matters:
        If one AI agent names database tables 'users' and another names them 'Users',
@@ -641,12 +641,12 @@ Enforcement: "All agents MUST follow this pattern"
 <step n="12" goal="Final review and update workflow status">
   <action>Present completion summary:</action>
 
-  <check if="{user_skill_level} == 'expert'">
+  <check if="{game_dev_experience} == 'expert'">
     "Architecture complete. {{decision_count}} decisions documented.
      Ready for implementation phase."
   </check>
 
-  <check if="{user_skill_level} == 'beginner'">
+  <check if="{game_dev_experience} == 'beginner'">
     "Excellent! Your architecture is complete. You made {{decision_count}} important
      decisions that will keep AI agents consistent as they build your app.
 

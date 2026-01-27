@@ -105,7 +105,7 @@ If `{execution_mode}` is "tech-spec":
 - Tests: {status}
 - Review findings: {X} addressed, {Y} skipped
 
-{Explain what was implemented based on user_skill_level}
+{Explain what was implemented based on game_dev_experience}
 ```
 
 ---
