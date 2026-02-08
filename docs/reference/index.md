@@ -5,6 +5,32 @@ description: Technical reference for BMGD
 
 # Reference
 
-Technical documentation for BMad Game Dev Studio configuration and options.
+Technical documentation for BMad Game Dev Studio.
 
-- **[Agents](agents.md)** - BMGD's six specialized game development agents
+---
+
+## Core Reference
+
+- **[Agents](./agents.md)** — BMGD's six specialized game development agents
+- **[Workflows](./workflows.md)** — Complete catalog of all BMGD workflows
+- **[Game Types](./game-types.md)** — All 24 game type templates
+
+---
+
+## Commands Reference
+
+| Command | Agent | Purpose |
+|---------|-------|---------|
+| `/bmgd-quick-prototype` | Indie | Create a rapid game prototype |
+| `/bmgd-brainstorm-game` | Game Designer | Generate game ideas |
+| `/bmgd-game-brief` | Game Designer | Create a project brief |
+| `/bmgd-create-gdd` | Game Designer | Create a Game Design Document |
+| `/bmgd-create-architecture` | Game Architect | Create technical architecture |
+| `/bmgd-generate-project-context` | Game Architect | Generate project context |
+| `/bmgd-sprint-planning` | Game Scrum Master | Plan and track sprints |
+| `/bmgd-sprint-status` | Game Scrum Master | View sprint progress |
+| `/bmgd-create-story` | Game Scrum Master | Create implementation stories |
+| `/bmgd-dev-story` | Game Developer | Implement a story |
+| `/bmgd-code-review` | Game Developer | Review code quality |
+
+For the complete workflow catalog, see the [Workflows Reference](./workflows.md).

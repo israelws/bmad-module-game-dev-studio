@@ -36,10 +36,11 @@ But you're not limited to these—BMGD works with any platform.
 
 | Workflow | Purpose |
 |----------|---------|
-| `/bmgd-help` | Get guided help for game development |
-| `/bmgd-quick-dev` | Jump straight into prototyping |
-| `/bmgd-gdd` | Create a Game Design Document |
-| `/bmgd-narrative` | Design your game's story |
+| [Your first game project](tutorials/first-game-project.md) | Create your first prototype in 15-30 minutes |
+| [Quick Flow vs Full Production](explanation/quick-flow-vs-full.md) | Choose your development approach |
+| [Set up Unity](how-to/setup-unity.md) | Configure Unity for BMGD |
+| [Set up Unreal](how-to/setup-unreal.md) | Configure Unreal for BMGD |
+| [Set up Godot](how-to/setup-godot.md) | Configure Godot for BMGD |
 
 ---
 
@@ -47,10 +48,10 @@ But you're not limited to these—BMGD works with any platform.
 
 | Section | Purpose |
 | ------- | ------- |
-| **[Tutorials](/tutorials/)** | Get started with BMGD |
-| **[How-To Guides](/how-to/)** | Practical guides for specific engines |
-| **[Explanation](/explanation/)** | Learn how BMGD works |
-| **[Reference](/reference/)** | Technical reference |
+| **[Tutorials](tutorials/)** | Get started with BMGD |
+| **[How-To Guides](how-to/)** | Practical guides for engines and workflows |
+| **[Explanation](explanation/)** | Learn how BMGD works |
+| **[Reference](reference/)** | Agents, workflows, and commands |
 
 ---
 

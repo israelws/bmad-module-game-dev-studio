@@ -376,7 +376,7 @@ Game QA integrates at multiple points:
 
 All agents share the principle:
 
-> "Find if this exists, if it does, always treat it as the bible I plan and execute against: `**/project-context.md`"
+> "Find if this exists, and if it does, always treat it as the source of truth for planning and execution: `**/project-context.md`"
 
 The `project-context.md` file (if present) serves as the authoritative source for project decisions and constraints.
 

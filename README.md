@@ -70,7 +70,7 @@ Select **Game Dev Studio** from the modules list.
 After installing, run from your project root:
 
 ```
-/bmgd-help          # Get guided help for game development
+/bmad-help          # Get guided help for game development
 /bmgd-quick-dev     # Jump straight into prototyping
 /bmgd-gdd           # Create a Game Design Document
 /bmgd-narrative     # Design your game's story
@@ -81,12 +81,12 @@ After installing, run from your project root:
 | Approach | When to Use | Workflow |
 |----------|-------------|----------|
 | **Quick Flow** | Rapid prototyping, small projects | `/bmgd-quick-dev` |
-| **Full Production** | Full games, teams, long-term | `/bmgd-help` for guided path |
+| **Full Production** | Full games, teams, long-term | `/bmad-help` for guided path |
 
 ## Example: Starting a New Game
 
 ```
-You: /bmgd-help
+You: /bmad-help
 BMGD: What kind of game are you making?
 You: A tactical sci-fi RPG
 BMGD: Great choice! Here's what I recommend...
