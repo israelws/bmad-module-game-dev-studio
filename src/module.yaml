@@ -63,3 +63,9 @@ primary_platform:
       label: "Godot"
     - value: "other"
       label: "Custom / Other"
+
+# Directories to create during installation (declarative, no code execution)
+directories:
+  - "{planning_artifacts}"
+  - "{implementation_artifacts}"
+  - "{project_knowledge}"
